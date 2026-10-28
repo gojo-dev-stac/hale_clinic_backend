@@ -14,7 +14,19 @@ except ImportError:
 
 SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-development-key-change-me")
 DEBUG = os.getenv("DEBUG", "False").lower() in {"1", "true", "yes"}
-ALLOWED_HOSTS = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if host.strip()]
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    if host.strip()
+]
+for host in (
+    "hale-clinic-backend.vercel.app",
+    os.getenv("VERCEL_URL", ""),
+    os.getenv("VERCEL_PROJECT_PRODUCTION_URL", ""),
+):
+    host = host.strip()
+    if host and host not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(host)
 
 INSTALLED_APPS = [
     "django.contrib.admin",

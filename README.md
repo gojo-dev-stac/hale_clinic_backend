@@ -22,6 +22,8 @@ python manage.py runserver
 
 The local default is SQLite (`db.sqlite3`). Set `DATABASE_URL` to any PostgreSQL provider URL to use managed PostgreSQL; no provider is hardcoded. Example: `postgres://user:password@db.example.net:5432/clinic?sslmode=require`. Protect credentials and use a strong `SECRET_KEY`. For production set `DEBUG=False`, `ALLOWED_HOSTS`, and secure TLS database settings.
 
+For Vercel deployments, `hale-clinic-backend.vercel.app` and Vercel's `VERCEL_URL`/`VERCEL_PROJECT_PRODUCTION_URL` are allowed automatically. Add any custom domain to the comma-separated `ALLOWED_HOSTS` environment variable.
+
 ## Admin
 
 Create the first administrator with `python manage.py createsuperuser`, start the backend, and sign in to the clinic's frontend staff portal at `http://localhost:3000/admin/login`. Use the Django staff username and password (not a customer account); a superuser created by `createsuperuser` is a staff user. The portal at `/admin` manages products, treatments, booking requests, order requests, contact enquiries, and newsletter subscriptions. It provides catalogue creation/editing, up to 12 image URLs per product or treatment (one per line), stock and retail-approval controls, storefront visibility, and request status updates. The first image is used as the card/hero image; detail pages provide selectable image thumbnails. Products and treatments are hidden by deactivation rather than deleted, preserving any order references.
