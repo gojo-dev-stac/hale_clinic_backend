@@ -1,0 +1,42 @@
+﻿from django.urls import path
+
+from .views import (
+    AccountBookingsView, AccountCurrentView, AccountLoginView, AccountLogoutView, AccountOrdersView, AccountRegisterView,
+    BookingCreateView, ContactEnquiryCreateView, CsrfTokenView, NewsletterSubscribeView,
+    OrderCreateView, ProductDetailView, ProductListView, StaffBookingDetailView, StaffBookingViewSet,
+    StaffContactEnquiryDetailView, StaffContactEnquiryViewSet, StaffCurrentView, StaffLoginView,
+    StaffLogoutView, StaffNewsletterViewSet, StaffOrderDetailView, StaffOrderViewSet, StaffProductDetailView,
+    StaffProductViewSet, StaffSummaryView, StaffTreatmentDetailView, StaffTreatmentViewSet, TreatmentListView,
+)
+
+urlpatterns = [
+    path("auth/csrf/", CsrfTokenView.as_view(), name="auth-csrf"),
+    path("staff/login/", StaffLoginView.as_view(), name="staff-login"),
+    path("staff/me/", StaffCurrentView.as_view(), name="staff-current"),
+    path("staff/logout/", StaffLogoutView.as_view(), name="staff-logout"),
+    path("staff/summary/", StaffSummaryView.as_view(), name="staff-summary"),
+    path("staff/products/", StaffProductViewSet.as_view(), name="staff-products"),
+    path("staff/products/<int:pk>/", StaffProductDetailView.as_view(), name="staff-product-detail"),
+    path("staff/treatments/", StaffTreatmentViewSet.as_view(), name="staff-treatments"),
+    path("staff/treatments/<int:pk>/", StaffTreatmentDetailView.as_view(), name="staff-treatment-detail"),
+    path("staff/bookings/", StaffBookingViewSet.as_view(), name="staff-bookings"),
+    path("staff/bookings/<str:reference>/", StaffBookingDetailView.as_view(), name="staff-booking-detail"),
+    path("staff/orders/", StaffOrderViewSet.as_view(), name="staff-orders"),
+    path("staff/orders/<str:reference>/", StaffOrderDetailView.as_view(), name="staff-order-detail"),
+    path("staff/enquiries/", StaffContactEnquiryViewSet.as_view(), name="staff-enquiries"),
+    path("staff/enquiries/<str:reference>/", StaffContactEnquiryDetailView.as_view(), name="staff-enquiry-detail"),
+    path("staff/newsletter/", StaffNewsletterViewSet.as_view(), name="staff-newsletter"),
+    path("auth/register/", AccountRegisterView.as_view(), name="auth-register"),
+    path("auth/login/", AccountLoginView.as_view(), name="auth-login"),
+    path("auth/logout/", AccountLogoutView.as_view(), name="auth-logout"),
+    path("auth/me/", AccountCurrentView.as_view(), name="auth-current"),
+    path("account/orders/", AccountOrdersView.as_view(), name="account-orders"),
+    path("account/bookings/", AccountBookingsView.as_view(), name="account-bookings"),
+    path("products/", ProductListView.as_view(), name="product-list"),
+    path("products/<slug:slug>/", ProductDetailView.as_view(), name="product-detail"),
+    path("treatments/", TreatmentListView.as_view(), name="treatment-list"),
+    path("bookings/", BookingCreateView.as_view(), name="booking-create"),
+    path("orders/", OrderCreateView.as_view(), name="order-create"),
+    path("contact/", ContactEnquiryCreateView.as_view(), name="contact-create"),
+    path("newsletter/", NewsletterSubscribeView.as_view(), name="newsletter-subscribe"),
+]
